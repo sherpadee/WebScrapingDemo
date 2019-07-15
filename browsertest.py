@@ -8,13 +8,13 @@ import time
 #browser.quit()
 
 ##firefox
-browser = webdriver.Firefox(executable_path = './geckodriver')
+browser = webdriver.Firefox(executable_path = 'geckodriver')
 browser.get('https://www.google.com') 
 time.sleep(5)
 browser.quit()
 
 ##chrome
-browser = webdriver.Chrome(executable_path = './chromedriver')
+browser = webdriver.Chrome(executable_path = 'chromedriver')
 browser.get('https://www.google.com') 
 time.sleep(5)
 browser.quit()
