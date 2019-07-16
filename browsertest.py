@@ -28,47 +28,19 @@ browser.quit()
 #time.sleep(5)
 #browser.quit()
 
-import unittest
 
-class ChromeBrowserTest(unittest.TestCase):
-
-    chrome_browser = None
-    page_url = ''
-
-    # Class setup method.
-    @classmethod
-    def setUpClass(cls):
-        ChromeBrowserTest.chrome_browser = webdriver.Chrome(executable_path = './chromedriver')
-        print('Browser start.')
-
-    # Class teardown method
-    @classmethod
-    def tearDownClass(cls):
-        if(ChromeBrowserTest.chrome_browser!=None):
-            ChromeBrowserTest.chrome_browser.quit()
-            print('Browser quit.')
-        else:
-            print('Browser is not started.')   
-    
-    # This is the test function.    
-    def browse_page(self):
-        if(self.chrome_browser!=None and len(self.page_url)>0):
-            self.chrome_browser.get(self.page_url)
-            print("Browser browse page.")
-            time.sleep(10)
-        else:
-            print('Browser is not started or page_url is empty.')       
-
-if __name__ == '__main__':
-    ChromeBrowserTest.page_url = 'https://www.google.com'
-    # Create a TestSuite object.
-    test_suite = unittest.TestSuite()
-
-    # Add test function in the suite.
-    test_suite.addTest(ChromeBrowserTest('browse_page'))
-
-    # Run test suite and get test result.
-    testResult = unittest.TestResult()
-    
-    test_suite.run(testResult)
-    print(testResult)
+browser = webdriver.Chrome(executable_path = cwd + '/chromedriver')
+browser.get('https://nuernberg.digital/festival/jobboerse') 
+time.sleep(1)
+total_width = browser.execute_script("return document.body.offsetWidth")
+total_height = browser.execute_script("return document.body.scrollHeight")
+browser.set_window_size(total_width, total_height)
+browser.save_screenshot("nuedigital.png")
+#alternate method
+#site = browser.find_element_by_tag_name('body')
+#site.screenshot('nuedigital.png')
+cookie_ok_button= browser.find_element_by_class_name('CallToAction.CallToAction--primary')
+cookie_ok_button.click()
+site = browser.find_element_by_class_name('JobList')
+site.screenshot('nuedigitaljobs.png')
+browser.quit()
