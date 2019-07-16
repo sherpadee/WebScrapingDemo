@@ -2,22 +2,25 @@ from selenium import webdriver
 import time
 import os
 
+ext = ''
+if os.name == 'nt':
+    ext = '.exe'
 
 cwd = os.getcwd()
 ##edge (windows only)
-#browser = webdriver.Edge(executable_path = cwd +'/msedgedriver')
+#browser = webdriver.Edge(executable_path = cwd +'/msedgedriver' + ext)
 #browser.get('https://www.google.com') 
 #time.sleep(5)
 #browser.quit()
 
 ##firefox
-browser = webdriver.Firefox(executable_path = cwd+ '/geckodriver')
+browser = webdriver.Firefox(executable_path = cwd + '/geckodriver' + ext)
 browser.get('https://www.google.com') 
 time.sleep(5)
 browser.quit()
 
 ##chrome
-browser = webdriver.Chrome(executable_path = cwd + '/chromedriver')
+browser = webdriver.Chrome(executable_path = cwd + '/chromedriver' + ext)
 browser.get('https://www.google.com') 
 time.sleep(5)
 browser.quit()
@@ -29,7 +32,7 @@ browser.quit()
 #browser.quit()
 
 
-browser = webdriver.Chrome(executable_path = cwd + '/chromedriver')
+browser = webdriver.Chrome(executable_path = cwd + '/chromedriver' + ext)
 browser.get('https://nuernberg.digital/festival/jobboerse') 
 time.sleep(1)
 total_width = browser.execute_script("return document.body.offsetWidth")
