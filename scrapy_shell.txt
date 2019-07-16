@@ -1,0 +1,10 @@
+>scrapy shell
+
+fetch("https://nuernberg.digital")
+
+view(response)
+
+print(response.text)
+
+response.css(".EventCard__title::text").extract()
+response.css(".EventCard__title::text").extract_first()
